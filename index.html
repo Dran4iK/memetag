@@ -1,39 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sigma Ahh Click</title>
+    <title>Sigma Ahh</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: url('https://ru.files.fm/u/j3yp4s6m7b') no-repeat center center fixed;
-            background-size: cover;
+            background: #000000;
             height: 100vh;
-            cursor: pointer; /* Курсор-указатель */
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* Скрываем аудио-элемент */
-        #sigmaAudio {
+        #fullscreenImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        audio {
             display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Звук -->
+    <img id="fullscreenImage" src="IMG_20250416_132439_556.jpg" alt="Background" 
+         onerror="this.style.display='none'">
+    
     <audio id="sigmaAudio" loop>
         <source src="Sigma Ahh.mp3" type="audio/mpeg">
     </audio>
 
     <script>
         const audio = document.getElementById('sigmaAudio');
-        audio.volume = 1.0; // Макс громкость
+        const image = document.getElementById('fullscreenImage');
         
-        // Запускаем звук по клику в любом месте
-        document.body.addEventListener('click', () => {
+        // Настройки
+        audio.volume = 1.0; // Максимальная громкость
+        
+        // Запуск по первому клику
+        document.body.addEventListener('click', function init() {
+            // Показать картинку
+            image.style.display = 'block';
+            
+            // Запустить звук
             audio.play();
-            // Убираем обработчик, чтобы звук не перезапускался при повторных кликах
-            document.body.removeEventListener('click', arguments.callee);
-        });
+            
+            // Удалить обработчик после первого клика
+            document.body.removeEventListener('click', init);
+        }, {once: true});
     </script>
 </body>
 </html>
