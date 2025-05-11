@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Сайт со звуком</title>
+</head>
+<body>
+    <audio id="myAudio" controls hidden>
+        <source src="Sigma Ahh.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('myAudio');
+            audio.play().catch(() => {
+                document.body.innerHTML = "<h1>КЛИКНИ СЮДА</h1>";
+                document.body.onclick = () => audio.play();
+            });
+        });
+    </script>
+</body>
+</html>
