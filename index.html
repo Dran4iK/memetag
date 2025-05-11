@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Автовоспроизведение аудио</title>
+    <title>Sigma Ahh Click</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://ru.files.fm/u/j3yp4s6m7b') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            cursor: pointer; /* Курсор-указатель */
+        }
+
+        /* Скрываем аудио-элемент */
+        #sigmaAudio {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <audio src="Sigma Ahh.mp3" autoplay loop></audio>
+    <!-- Звук -->
+    <audio id="sigmaAudio" loop>
+        <source src="Sigma Ahh.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById('sigmaAudio');
+        audio.volume = 1.0; // Макс громкость
+        
+        // Запускаем звук по клику в любом месте
+        document.body.addEventListener('click', () => {
+            audio.play();
+            // Убираем обработчик, чтобы звук не перезапускался при повторных кликах
+            document.body.removeEventListener('click', arguments.callee);
+        });
+    </script>
 </body>
 </html>
