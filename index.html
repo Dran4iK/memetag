@@ -1,20 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Сайт со звуком</title>
+    <title>Автозвук</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            font-family: Arial;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #playButton {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <audio id="myAudio" controls hidden>
+    <audio id="myAudio" loop>
         <source src="Sigma Ahh.mp3" type="audio/mpeg">
     </audio>
 
+    <button id="playButton" hidden>Play</button>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var audio = document.getElementById('myAudio');
-            audio.play().catch(() => {
-                document.body.innerHTML = "<h1>КЛИКНИ СЮДА</h1>";
-                document.body.onclick = () => audio.play();
-            });
+        const audio = document.getElementById('myAudio');
+        const button = document.getElementById('playButton');
+        
+        // Пытаемся запустить звук автоматически
+        audio.volume = 1.0; // Максимальная громкость
+        const playPromise = audio.play();
+        
+        // Если браузер блокирует автовоспроизведение
+        playPromise.catch(() => {
+            button.hidden = false; // Показываем кнопку
+            button.onclick = () => {
+                audio.play();
+                button.hidden = true;
+            };
         });
     </script>
 </body>
